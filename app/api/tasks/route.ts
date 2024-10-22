@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const tasks = await prisma.task.findMany({
     orderBy: [
@@ -28,7 +30,7 @@ export async function POST(request: Request) {
 
 export async function PUT(request: Request) {
   const data = await request.json();
-  const { id, createdAt, ...updateData } = data;
+  const { id, ...updateData } = data;
   
   if (updateData.dueDate) {
     updateData.dueDate = new Date(updateData.dueDate).toISOString();

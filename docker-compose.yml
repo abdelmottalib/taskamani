@@ -4,8 +4,8 @@ services:
     image: postgres:15-alpine
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 1337FIL
-      POSTGRES_DB: mydatabase
+      POSTGRES_PASSWORD: hello-bocal
+      POSTGRES_DB: mydb
     ports:
       - "5432:5432"
     networks:
@@ -14,7 +14,7 @@ services:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
 
   app:
     build:
@@ -22,14 +22,19 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    environment:
+      DATABASE_URL: "postgresql://postgres:hello-bocal@db:5432/tasks"
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      - DATABASE_URL=postgresql://postgres:1337FIL@db:5432/mydatabase?schema=public
     networks:
       - app-network
+    entrypoint:
+      [
+        "sh",
+        "-c",
+        "npx prisma db push && npm run build && npm run start",
+      ]
 
 networks:
   app-network:
-    driver: bridge

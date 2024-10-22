@@ -43,6 +43,9 @@ The project uses Docker for easy setup and deployment. The main configuration fi
 ## Environment Variables
 
 The necessary environment variables are set in the `docker-compose.yml` file. For local development without Docker, you can create a `.env` file in the root directory with the following content:
+```
+DATABASE_URL="postgresql://username:password@localhost:5432/taskamani?schema=public"
+```
 
 ## Available Scripts
 

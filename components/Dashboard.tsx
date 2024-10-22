@@ -13,7 +13,6 @@ export default function Dashboard({ children }: DashboardProps) {
 
   return (
     <div className="flex h-screen bg-gray-900 text-white">
-      {/* Mobile header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#101213] md:hidden">
         <div className="flex justify-between items-center p-4">
           <h1 className="text-2xl font-bold text-white">TaskaMani</h1>
@@ -26,7 +25,6 @@ export default function Dashboard({ children }: DashboardProps) {
         </div>
       </header>
 
-      {/* Sidebar */}
       <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#101213] shadow-md transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:relative md:translate-x-0`}>
         <div className="p-4 flex justify-between items-center md:mt-0 mt-16">
           <h1 className="text-2xl font-bold text-white md:block hidden">TaskaMani</h1>
@@ -47,7 +45,6 @@ export default function Dashboard({ children }: DashboardProps) {
         </div>
       </main>
 
-      {/* Overlay */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"

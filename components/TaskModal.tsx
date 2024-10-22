@@ -17,10 +17,7 @@ interface TaskModalProps {
 }
 
 const TaskModal: React.FC<TaskModalProps> = ({ task, onClose }) => {
-  const getBadgeColor = (category: string): string => {
-    return categoryColors[category.toLowerCase()] || categoryColors.other;
-  };
-
+ 
   useEffect(() => {
     const handleEscapeKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -81,14 +78,14 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, onClose }) => {
               <p className="text-gray-400">Priority</p>
               <p className="text-white">{task.priority}</p>
             </div>
-            <div>
-              <p className="text-gray-400">Due Date</p>
-              {task.dueDate && (
-                <p className="text-white">
+            {task.dueDate && (
+              <div>
+                <p className="text-gray-400">Due Date</p>
+                <p className=" text-blue-400">
                   {new Date(task.dueDate).toLocaleDateString()}
                 </p>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </motion.div>
       </motion.div>

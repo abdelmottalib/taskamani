@@ -18,7 +18,7 @@ const PriorityBadge: React.FC<{ priority: string }> = ({ priority }) => {
   }[priority.toLowerCase()] || "bg-gray-500";
 
   return (
-    <span className={`text-xs font-semibold px-2 py-1 rounded-full ${colorClass}`}>
+    <span className={`text-[10px] xs:text-xs font-semibold px-1 py-0.5 xs:px-2 xs:py-1 rounded-full ${colorClass}`}>
       {priority}
     </span>
   );
@@ -149,15 +149,17 @@ const TaskCard: React.FC<TaskCardProps> = ({
           <p className="text-sm text-gray-400 mb-3 break-words line-clamp-4">
             {description}
           </p>
-          <div className="flex justify-between items-center">
-            <CategoryBadge category={category} />
-            <div className="flex items-center space-x-2">
-              <div className="text-xs text-blue-400">
+          <div className="flex flex-col space-y-2">
+            <div className="flex justify-between items-center">
+              <CategoryBadge category={category} />
+              <div className="flex flex-col items-end">
+                <PriorityBadge priority={priority} />
                 {dueDate && (
-                  <span>Due: {new Date(dueDate).toLocaleDateString()}</span>
+                  <div className="text-[10px] mt-2 xs:text-xs text-blue-400 ">
+                    Due: {new Date(dueDate).toLocaleDateString()}
+                  </div>
                 )}
               </div>
-              <PriorityBadge priority={priority} />
             </div>
           </div>
         </>

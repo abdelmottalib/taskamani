@@ -7,22 +7,10 @@ import {
 } from "react-icons/fa";
 import CategoryBadge from "./CategoryBadge";
 import TaskForm from "./TaskForm";
-
+import PriorityBadge from "./PriorityBadge";
 import { Task } from "@/types/types"; 
 
-const PriorityBadge: React.FC<{ priority: string }> = ({ priority }) => {
-  const colorClass = {
-    low: "bg-green-500",
-    medium: "bg-yellow-500",
-    high: "bg-red-500",
-  }[priority.toLowerCase()] || "bg-gray-500";
 
-  return (
-    <span className={`text-[10px] xs:text-xs font-semibold px-1 py-0.5 xs:px-2 xs:py-1 rounded-full ${colorClass}`}>
-      {priority}
-    </span>
-  );
-};
 interface TaskCardProps extends Task {
   onEdit: (task: Task) => void;
   onDelete: (id: number) => void;
@@ -87,8 +75,10 @@ const TaskCard: React.FC<TaskCardProps> = ({
   return (
     <motion.div
       className="bg-background-light rounded-xl p-4 mb-4 relative cursor-pointer"
+      layout
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.3 }}
       onClick={handleCardClick}
     >

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import TaskForm from "./TaskForm";
 import TaskModal from "./TaskModal";
-
 import { Task } from "@/types/types";
 import TaskCard from "./TaskCard";
+import { AnimatePresence } from "framer-motion";
+
 interface TaskListProps {
   tasks: Task[];
   onDelete: (id: number) => void;
@@ -121,15 +122,17 @@ const TaskList: React.FC<TaskListProps> = ({
                 +
               </button>
             )}
-            {statusTasks.map((task) => (
-              <TaskCard
-                key={task.id}
-                {...task}
-                onEdit={(editedTask) => onTaskSubmit(editedTask)}
-                onDelete={onDelete}
-                onClick={() => handleTaskClick(task)}
-              />
-            ))}
+            <AnimatePresence>
+              {statusTasks.map((task) => (
+                <TaskCard
+                  key={task.id}
+                  {...task}
+                  onEdit={(editedTask) => onTaskSubmit(editedTask)}
+                  onDelete={onDelete}
+                  onClick={() => handleTaskClick(task)}
+                />
+              ))}
+            </AnimatePresence>
           </div>
         ))}
       </div>

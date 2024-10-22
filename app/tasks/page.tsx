@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Dashboard from "@/components/Dashboard";
 import TaskList from "@/components/TaskList";
-import TaskForm from "@/components/TaskForm";
 import { Task } from '@/types/types';
 
 export default function Tasks() {

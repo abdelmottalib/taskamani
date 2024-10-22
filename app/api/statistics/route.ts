@@ -2,6 +2,17 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 
 export async function GET() {
+  if (process.env.NODE_ENV === 'production') {
+    return NextResponse.json({
+      totalTasks: 0,
+      completedTasks: 0,
+      overdueTasks: 0,
+      tasksByStatus: {},
+      tasksByCategory: {},
+      tasksByPriority: {},
+    });
+  }
+
   const totalTasks = await prisma.task.count();
   const completedTasks = await prisma.task.count({ where: { status: 'DONE' } });
   const overdueTasks = await prisma.task.count({

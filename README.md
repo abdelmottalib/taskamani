@@ -6,9 +6,8 @@ TaskaMani is a modern task management application built with Next.js, React, and
 
 Before you begin, ensure you have the following installed on your system:
 
-- Node.js (version 14 or later)
-- npm (usually comes with Node.js)
-- PostgreSQL database
+- Docker
+- Docker Compose
 
 ## Getting Started
 
@@ -18,30 +17,12 @@ Before you begin, ensure you have the following installed on your system:
    cd taskamani
    ```
 
-2. Install dependencies:
+2. Build and run the Docker containers:
    ```
-   npm install
-   ```
-
-3. Set up the environment variables:
-   Create a `.env` file in the root directory and add the following:
-   ```
-   DATABASE_URL="postgresql://username:password@localhost:5432/taskamani?schema=public"
-   ```
-   Replace `username`, `password`, and `taskamani` with your PostgreSQL credentials and desired database name.
-
-4. Set up the database:
-   ```
-   npx prisma migrate dev
-   ```
-   This command will create the database and apply all migrations.
-
-5. Run the development server:
-   ```
-   npm run dev
+   docker-compose up --build
    ```
 
-6. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. The application will be available at [http://localhost:3000](http://localhost:3000).
 
 ## Project Structure
 
@@ -51,6 +32,17 @@ Before you begin, ensure you have the following installed on your system:
 - `prisma/`: Prisma schema and migrations
 - `public/`: Static assets
 - `types/`: TypeScript type definitions
+
+## Docker Configuration
+
+The project uses Docker for easy setup and deployment. The main configuration files are:
+
+- `Dockerfile`: Defines the container for the Next.js application
+- `docker-compose.yml`: Orchestrates the application and database containers
+
+## Environment Variables
+
+The necessary environment variables are set in the `docker-compose.yml` file. For local development without Docker, you can create a `.env` file in the root directory with the following content:
 
 ## Available Scripts
 

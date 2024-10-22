@@ -3,13 +3,7 @@ import { Task } from "@/types/types";
 import { FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import CategoryBadge from "./CategoryBadge";
-
-const categoryColors: { [key: string]: string } = {
-  work: "#55B1DF",
-  personal: "#DEB2EB",
-  general: "#98D5BB",
-  other: "#817DEC",
-};
+import PriorityBadge from "./PriorityBadge";
 
 interface TaskModalProps {
   task: Task;
@@ -63,7 +57,10 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, onClose }) => {
               <FaTimes />
             </button>
           </div>
-          <CategoryBadge category={task.category} />
+          <div className="flex items-center justify-between mb-4">
+            <CategoryBadge category={task.category} />
+            <PriorityBadge priority={task.priority} />
+          </div>
           <div className="mb-6">
             <p className="text-gray-300 whitespace-pre-wrap break-words mt-2">
               {task.description}
@@ -74,14 +71,10 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, onClose }) => {
               <p className="text-gray-400">Status</p>
               <p className="text-white">{task.status}</p>
             </div>
-            <div>
-              <p className="text-gray-400">Priority</p>
-              <p className="text-white">{task.priority}</p>
-            </div>
             {task.dueDate && (
               <div>
                 <p className="text-gray-400">Due Date</p>
-                <p className=" text-blue-400">
+                <p className="text-blue-400">
                   {new Date(task.dueDate).toLocaleDateString()}
                 </p>
               </div>

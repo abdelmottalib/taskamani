@@ -69,7 +69,18 @@ const TaskModal: React.FC<TaskModalProps> = ({ task, onClose }) => {
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
               <p className="text-gray-400">Status</p>
-              <p className="text-white">{task.status}</p>
+              <p className="text-white flex items-center">
+                <span
+                  className={`w-3 h-3 rounded-full mr-2 ${
+                    task.status === "TODO"
+                      ? "bg-purple-500"
+                      : task.status === "IN_PROGRESS"
+                      ? "bg-blue-500"
+                      : "bg-green-500"
+                  }`}
+                ></span>
+                {task.status}
+              </p>
             </div>
             {task.dueDate && (
               <div>

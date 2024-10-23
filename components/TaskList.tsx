@@ -68,27 +68,41 @@ const TaskList: React.FC<TaskListProps> = ({
 
   return (
     <div>
-      <div className="mb-4 flex space-x-4">
-        <select
-          className="bg-background-light text-white rounded-md p-2"
-          value={categoryFilter}
-          onChange={(e) => setCategoryFilter(e.target.value)}
-        >
-          <option value="all">All Categories</option>
-          <option value="work">Work</option>
-          <option value="personal">Personal</option>
-          <option value="general">General</option>
-        </select>
-        <select
-          className="bg-background-light text-white rounded-md p-2"
-          value={priorityFilter}
-          onChange={(e) => setPriorityFilter(e.target.value)}
-        >
-          <option value="all">All Priorities</option>
-          <option value="low">Low</option>
-          <option value="medium">Medium</option>
-          <option value="high">High</option>
-        </select>
+      <div className="mb-4 flex justify-between">
+        <div className="flex flex-wrap gap-2">
+          <button
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${categoryFilter === 'all' ? 'bg-blue-500 text-white' : 'bg-background-light text-gray-300 hover:bg-blue-500 hover:text-white'}`}
+            onClick={() => setCategoryFilter('all')}
+          >
+            All Categories
+          </button>
+          {['work', 'personal', 'general'].map((category) => (
+            <button
+              key={category}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${categoryFilter === category ? 'bg-blue-500 text-white' : 'bg-background-light text-gray-300 hover:bg-blue-500 hover:text-white'}`}
+              onClick={() => setCategoryFilter(category)}
+            >
+              {category.charAt(0).toUpperCase() + category.slice(1)}
+            </button>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <button
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${priorityFilter === 'all' ? 'bg-purple-500 text-white' : 'bg-background-light text-gray-300 hover:bg-purple-500 hover:text-white'}`}
+            onClick={() => setPriorityFilter('all')}
+          >
+            All Priorities
+          </button>
+          {['low', 'medium', 'high'].map((priority) => (
+            <button
+              key={priority}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${priorityFilter === priority ? 'bg-purple-500 text-white' : 'bg-background-light text-gray-300 hover:bg-purple-500 hover:text-white'}`}
+              onClick={() => setPriorityFilter(priority)}
+            >
+              {priority.charAt(0).toUpperCase() + priority.slice(1)}
+            </button>
+          ))}
+        </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {Object.entries(groupedTasks).map(([status, statusTasks]) => (
